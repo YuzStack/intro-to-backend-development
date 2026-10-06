@@ -1,0 +1,29 @@
+{
+  "name": "into-to-backend-development",
+  "version": "1.0.0",
+  "description": "A YouTube tutorial for Intro to Backend",
+  "homepage": "https://github.com/YuzStack/intro-to-backend-development#readme",
+  "bugs": {
+    "url": "https://github.com/YuzStack/intro-to-backend-development/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuzStack/intro-to-backend-development.git"
+  },
+  "license": "ISC",
+  "author": "YuzStack",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.5",
+    "express": "^5.2.1",
+    "mongoose": "^9.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
