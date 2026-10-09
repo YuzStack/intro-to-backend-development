@@ -1,0 +1,3 @@
+# Ignore absolutely everything in these directories & files
+node_modules
+.env

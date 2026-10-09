@@ -1,23 +1,23 @@
-import dotenv from "dotenv";
-import connectDB from "./config/database.js";
-import app from "./app.js";
+import dotenv from 'dotenv';
+import connectDB from './config/database.js';
+import app from './app.js';
 
 dotenv.config({
-  path: "./.env",
+  path: './.env',
 });
 
 const startServer = async () => {
   try {
     await connectDB();
 
-    app.on("error", (error) => {
-      console.log("ERROR", error);
+    app.on('error', (error) => {
+      console.log('ERROR', error);
       throw error;
     });
 
     app.listen(process.env.PORT || 8000);
   } catch (error) {
-    console.log("MongoDB connection failed", error);
+    console.log('MongoDB connection failed', error);
   }
 };
 
