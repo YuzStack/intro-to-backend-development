@@ -56,8 +56,6 @@ const loginUser = async (req, res) => {
     if (!isMatch) return res.status(401).json({ message: 'Invalid credentials.' });
 
     // 3. Authenticate user
-    // ...
-
     res.status(200).json({
       message: 'User logged in.',
       user: { id: user._id, email: user.email, username: user.username },
@@ -68,4 +66,21 @@ const loginUser = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser };
+const logoutUser = async (req, res) => {
+  try {
+    // 1. Parse the request body (main data)
+    const { email } = req.body;
+
+    // 2. Find the user (in our database)
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: 'User not found.' });
+
+    // 3. Unauthenticate user
+    res.status(204).json({ message: 'Logout successful.' });
+  } catch (error) {
+    console.log(error.message); // Dev Mode
+    res.status(500).json({ message: 'Internal server error.' });
+  }
+};
+
+export { registerUser, loginUser, logoutUser };
