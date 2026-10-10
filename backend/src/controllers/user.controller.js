@@ -5,7 +5,7 @@ const registerUser = async (req, res) => {
     // 1. Parse the request body (main data)
     const { username, email, password } = req.body;
 
-    // 2. Do Basic Validations
+    // 2. Do Data Validations
     // Check if all fields have valid inputs
     if (!username || !email || !password) {
       return res.status(400).json({ message: 'All fields are important!' });
@@ -31,8 +31,41 @@ const registerUser = async (req, res) => {
       user: { id: user._id, email: user.email, username: user.username },
     });
   } catch (error) {
+    console.log(error.message); // Dev Mode
     res.status(500).json({ message: 'Internal server error', error: error.message });
   }
 };
 
-export { registerUser };
+const loginUser = async (req, res) => {
+  try {
+    // 1. Parse the request body (main data)
+    const { email, password } = req.body;
+
+    // 2. Do Data Validations
+    // Check if all fields have valid inputs
+    if (!email || !password) {
+      return res.status(400).json({ message: 'All fields are important!' });
+    }
+
+    // Check if user even exists (in our database)
+    const user = await User.findOne({ email: email.toLowerCase() });
+    if (!user) return res.status(401).json({ message: 'User not found.' });
+
+    // Compare the provided password with the stored password (of the user in the database)
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) return res.status(401).json({ message: 'Invalid credentials.' });
+
+    // 3. Authenticate user
+    // ...
+
+    res.status(200).json({
+      message: 'User logged in.',
+      user: { id: user._id, email: user.email, username: user.username },
+    });
+  } catch (error) {
+    console.log(error.message); // Dev Mode
+    res.status(500).json({ message: 'Internal server error.' });
+  }
+};
+
+export { registerUser, loginUser };
