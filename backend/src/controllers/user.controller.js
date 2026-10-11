@@ -32,7 +32,7 @@ const registerUser = async (req, res) => {
     });
   } catch (error) {
     console.log(error.message); // Dev Mode
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
 
