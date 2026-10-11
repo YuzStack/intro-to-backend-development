@@ -31,8 +31,7 @@ const registerUser = async (req, res) => {
       user: { id: user._id, email: user.email, username: user.username },
     });
   } catch (error) {
-    console.log(error.message); // Dev Mode
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: 'Internal server error', error });
   }
 };
 
@@ -61,8 +60,7 @@ const loginUser = async (req, res) => {
       user: { id: user._id, email: user.email, username: user.username },
     });
   } catch (error) {
-    console.log(error.message); // Dev Mode
-    res.status(500).json({ message: 'Internal server error.' });
+    res.status(500).json({ message: 'Internal server error.', error });
   }
 };
 
@@ -78,8 +76,7 @@ const logoutUser = async (req, res) => {
     // 3. Unauthenticate user
     res.status(204).json({ message: 'Logout successful.' });
   } catch (error) {
-    console.log(error.message); // Dev Mode
-    res.status(500).json({ message: 'Internal server error.' });
+    res.status(500).json({ message: 'Internal server error.', error });
   }
 };
 
